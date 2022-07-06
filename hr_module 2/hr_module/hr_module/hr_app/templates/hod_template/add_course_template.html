@@ -1,0 +1,155 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Add Course
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Course</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id = "add_course_form" role="form" method="POST" action="{% url 'add_course_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Course Name </label>
+                                <input type="text" class="form-control" name="course" placeholder="Enter Course" id="course_name">
+                            </div>
+                            <div class="form-group">
+                                <label>Course Number </label>
+                                <input type="text" class="form-control" name="coursenumber" placeholder="Enter Course Number" id="course_number">
+                            </div>
+                            
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Add Course</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Course Details</h3>
+
+                            <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                <th>Serial</th>
+                                <th>Course Name</th>
+                                <th>Course Number</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <!-- <th>Action</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in courses %}
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ course.course_name }}</td>
+                                <td>{{ course.course_number }}</td>
+                                <td>{{ course.created_at }}</td>
+                                <td>{{ course.updated_at }}</td>
+                                <td>
+                                    <a href="{% url 'edit_course' course.course_id %}" class="btn btn-success">Edit</a> 
+                                    <!-- <a href="{% url 'delete_course' course.course_id %}" class="btn btn-danger">Delete</a> -->
+                                </td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+    <script type = "text/javascript">
+        $document.on('submit','#add_course_form',function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type:'POST',
+                url:'add_course_save/',
+                data: {
+                    coursename:$('#course_name').val(),
+                    coursenumber:$('#course_number').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
+                },
+                success:function(){
+                    alert("Course added successfully")
+                }
+            });
+        });
+
+      </script>
+  {% endblock main_content %}
+}

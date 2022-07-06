@@ -1,0 +1,21 @@
+personnel_id,Pno,name,rank,Branch,Cadre,specialisation,commission_type,appointment,Qualification,aircraft_qualification_1,aircraft_qualification_2,aircraft_qualification_3,courses_1_id,course_1_status,course_2_id,course_2_status,course_3_id,course_3_status,course_4_id,course_4_status,course_5_id,course_5_status,doj,station,doj_station,seniority_in_rank,look_year,medical_category,dob,date_of_commission,date_of_retirement,date_of_leaving_service,date_of_superannuation,marital_status,spouse_name,afloat_ashore,ex_units,ex_unit_grp,future_unit,future_appt,dtbr,duration_in_present_unit,gender,select_list_year,chance_selection,command_sce_result,special_child_yn,sea_command_yn,sublt_seniority,special_skills,spouse_nationality,Remarks,Unit
+1,12345a,ABHISHEK MOHANTY,LT,L,AL,MTECH(AL),SSC,DY.DIR,BTECH,RPA,,,TMC,COMPLETED,,,,,,,,,30/12/2013,GARUDA,5-9-20,3,29,S1A1,5-6-91,30-12-13,30-12-23,30-12-23,,M,NEENA,ASHORE,PARUNDU,FRONT LINE,,,,1.5,M,,,,N,,8.5,,INDIAN,,336
+2,23456a,MANOJ,LT CDR,L,AL,MTECH(AE),,ATO,BE,SK,,,DSSC,COMPLETED,,,,,,,,,30/12/2014,DEGA,5-9-20,,,,,,,,,,,,,,,,,2,M,,,,Y,,9,,INDIAN,,350
+3,12221a,PARASHAR,CDR,L,AL,MTECH(AL),,ALO,BTECH,DO,,,TSOC,COMPLETED,,,,,,,,,20/12/2015,HANSA,,,,,,,,,,,,,,,,,,3,M,,,,N,,5,,INDIAN,,303
+4,23332a,ABDUL,LT,L,AL,MTECH(AE),,SAEO,BE,CHK,,,QAS(AERO),COMPLETED,,,,,,,,,20/12/2016,GARUDA,,,,,,,,,,,,,,,,,,1,M,,,,Y,,6,,INDIAN,,336
+5,34443a,SAI,LT CDR,L,AL,MTECH(AL),,SALO,BTECH,MIG,,,NHCC,COMPLETED,,,,,,,,,21/11/2012,DEGA,,,,,,,,,,,,,,,,,,2,M,,,,N,,7,,INDIAN,,350
+6,45554a,SANGWAN,CDR,L,AL,MTECH(AE),,AEO,BE,KV,,,TMC,COMPLETED,,,,,,,,,12/12/2013,HANSA,,,,,,,,,,,,,,,,,,3,M,,,,Y,,8,,INDIAN,,303
+7,56665a,ASHWIN,LT,L,AL,MTECH(AL),,DIR,BTECH,MH,,,DSSC,COMPLETED,,,,,,,,,13/12/2014,GARUDA,,,,,,,,,,,,,,,,,,1.5,M,,,,N,,2,,INDIAN,,336
+8,67776a,SURYA,LT,L,AL,MTECH(AE),,OIC,BE,RPA,,,TSOC,COMPLETED,,,,,,,,,14/12/2015,DEGA,,,,,,,,,,,,,,,,,,2.5,M,,,,Y,,5,,INDIAN,,350
+9,78887a,SANDEEP,LT CDR,L,AL,MTECH(AL),,DY.DIR,BTECH,SK,,,QAS(AERO),COMPLETED,,,,,,,,,15/12/2016,HANSA,,,,,,,,,,,,,,,,,,3.4,M,,,,N,,7.5,,INDIAN,,303
+10,89998a,DUTTA,CDR,L,AL,MTECH(AE),,ATO,BE,DO,,,NHCC,COMPLETED,,,,,,,,,16/11/2012,GARUDA,,,,,,,,,,,,,,,,,,3,M,,,,Y,,8.5,,INDIAN,,336
+11,90009a,KRISHNA,LT,L,AL,MTECH(AL),,ALO,BTECH,CHK,,,TMC,COMPLETED,,,,,,,,,17/12/2013,DEGA,,,,,,,,,,,,,,,,,,2,F,,,,N,,9,,INDIAN,,350
+12,12332a,SUDHY,LT CDR,L,AL,MTECH(AE),,SAEO,BE,MIG,,,DSSC,COMPLETED,,,,,,,,,18/12/2014,HANSA,,,,,,,,,,,,,,,,,,2.3,F,,,,Y,,5,,INDIAN,,303
+13,23443a,SHYAM,CDR,L,AL,MTECH(AL),,SALO,BTECH,KV,,,TSOC,COMPLETED,,,,,,,,,19/12/2015,GARUDA,,,,,,,,,,,,,,,,,,1.2,F,,,,N,,6,,INDIAN,,336
+14,34554a,ANTONY,LT,L,AL,MTECH(AE),,AEO,BE,MH,,,QAS(AERO),COMPLETED,,,,,,,,,29/12/2016,DEGA,,,,,,,,,,,,,,,,,,1.9,F,,,,Y,,7,,INDIAN,,350
+15,45665a,MANU,LT,L,AL,MTECH(AL),,DIR,BTECH,RPA,,,NHCC,COMPLETED,,,,,,,,,7/11/2012,HANSA,,,,,,,,,,,,,,,,,,1.6,F,,,,N,,8,,INDIAN,,303
+16,56776a,SANWAL,LT CDR,L,AL,MTECH(AE),,OIC,BE,SK,,,TMC,COMPLETED,,,,,,,,,8/12/2013,GARUDA,,,,,,,,,,,,,,,,,,1,F,,,,Y,,2,,INDIAN,,336
+17,67887a,PANDEY,CDR,L,AL,MTECH(AL),,ATO,BTECH,DO,,,DSSC,COMPLETED,,,,,,,,,9/12/2014,DEGA,,,,,,,,,,,,,,,,,,2,F,,,,N,,5,,INDIAN,,350
+18,78998a,ROUT,LT,L,AL,MTECH(AE),,ALO,BE,CHK,,,TSOC,COMPLETED,,,,,,,,,19/12/2015,HANSA,,,,,,,,,,,,,,,,,,3,F,,,,N,,7.5,,INDIAN,,303
+19,89009a,SHARATH,LT CDR,L,AL,MTECH(AL),,AEO,BTECH,MIG,,,QAS(AERO),COMPLETED,,,,,,,,,10/12/2016,GARUDA,,,,,,,,,,,,,,,,,,1,F,,,,Y,,4,,INDIAN,,336
+20,19092a,THAKUR,CDR,L,AL,MTECH(AE),,STO,BE,KV,,,NHCC,COMPLETED,,,,,,,,,11/11/2012,DEGA,,,,,,,,,,,,,,,,,,2,F,,,,Y,,9,,INDIAN,,344

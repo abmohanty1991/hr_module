@@ -1,0 +1,138 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Manage Transfer
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+
+<section class="content">
+    
+    
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id = "manage_transfer_form" srole="form" method="POST" action="{% url 'manage_transfer_action' %}">
+                    {% csrf_token %}
+
+                    
+                            {% comment %} Display Messages {% endcomment %}
+                            {% if messages %}
+                            <div class="form-group">
+                            <div class="col-12">
+                                {% for message in messages %}
+                                {% if message.tags == "error" %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                {% elif message.tags == "success" %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            </div>
+                            {% endif %}
+                        
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Select P.No </label>
+                                <select class="form-control" name="course">
+                                    <option disabled selected value> -- select the P.No -- </option>
+                                    {% for personnelmaster in personnelmasters %}
+                                        <option value="{{ personnelmaster.personnel_id }}">{{ personnelmaster.pno }}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div>
+                            {% for personnelmaster in personnelmasters %}
+                            <input type="hidden" name="personnel_id" value="{{ personnelmaster.personnel_id }}" />
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Manage Transfer</button>
+                    </div>
+                </form>
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+
+        
+
+    </div><!-- /.container-fluid -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Course Details</h3>
+
+                    <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    </div>
+                </div>                
+                </div>
+            <!-- /.card -->
+
+        </div>
+    </div>
+  </section>
+
+  <script type = "text/javascript">
+  $("#rank").prop("selectedIndex", -1);
+</script>
+<script type = "text/javascript">
+    $document.on('submit','#add_course_form',function(e){
+        e.preventDefault();
+
+        $.ajax({ 
+            type:'POST',
+            url:'add_course_save/',
+            data: {
+                coursename:$('#course_name').val(),
+                coursenumber:$('#course_number').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
+            },
+            success:function(){
+                alert("Course added successfully")
+            }
+        });
+    });
+
+  </script>
+
+  {% endblock main_content %}
+
+  {% block custom_js %}
+    {% comment %} Checking if email and username already exists or not usin Ajax {% endcomment %}
+
+    
+  {% endblock custom_js %}

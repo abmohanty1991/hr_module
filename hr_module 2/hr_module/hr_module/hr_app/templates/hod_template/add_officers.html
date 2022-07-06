@@ -1,0 +1,478 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Add Officers
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+
+<section class="content">
+    
+    
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title"></h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id = "add_officers_form" srole="form" method="POST" action="{% url 'add_officers_save' %}">
+                    {% csrf_token %}
+
+                    
+                            {% comment %} Display Messages {% endcomment %}
+                            {% if messages %}
+                            <div class="form-group">
+                            <div class="col-12">
+                                {% for message in messages %}
+                                {% if message.tags == "error" %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                {% elif message.tags == "success" %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            </div>
+                            {% endif %}
+                        
+
+                    <div class="card-body">
+                        <!-- <div class="form-group">
+                            <label>Pno </label>
+                                <select class="form-control" name="pno">
+                                    {% for student in students %}
+                                        <option value="{{ student.id }}">{{ student.pno }}</option>
+                                    {% endfor %}
+                                </select>
+                        </div> -->
+                        <div class="form-group">
+                            <label>Enter P.No </label>
+                            <input type="text" class="form-control" name="pno" placeholder="Select Pno" id="pno">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Name </label>
+                            <input type="text" class="form-control" name="name" placeholder="Select Name" id="name">
+                        </div>
+                        <!-- <div class="form-group">
+                            <label> Rank </label>
+                            <input type="text" class="form-control" name="rank" placeholder="Select Rank" id="rank">
+                        </div> -->
+                        <div class="form-group">
+                            <label> Rank </label>
+                                <select class="form-control" name="rank" placeholder="Select Rank" id="rank">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="SLt">SLt</option>
+                                    <option value="Lt">Lt</option>
+                                    <option value="Lt Cdr">Lt Cdr</option>
+                                    <option value="Cdr">Cdr</option>
+                                    <option value="Capt">Capt</option>
+                                    <option value="Cmde">Cmde</option>
+                                    <option value="RAdm">RAdm</option>
+                                    <option value="VAdm">VAdm</option> 
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Branch </label>
+                                <select class="form-control" name="branch" placeholder="Select Branch" id="branch">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="E">Engineering</option>
+                                    <option value="L">Electrical</option> 
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Cadre </label>
+                                <select class="form-control" name="cadre" placeholder="Select cadre" id="cadre">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="AE">AE</option>
+                                    <option value="AL">AL</option>
+                                    <option value="SDAL">SD(AL)</option>
+                                    <option value="SDAE">SD(AE)</option>
+                                    <option value="SDAR">SD(AR)</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Specialisation </label>
+                            <input type="text" class="form-control" name="specialisation" placeholder="Enter specialisation" id="specialisation">
+                        </div>
+                        <div class="form-group">
+                            <label> Commission </label>
+                                <select class="form-control" name="commission" placeholder="Select commission" id="commission">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="SSC">SSC</option>
+                                    <option value="PC">PC</option>
+                                    <option value="STP">STP</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Enter appointment </label>
+                            <input type="text" class="form-control" name="appointment" placeholder="Enter appointment" id="appointment">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter qualification </label>
+                            <input type="text" class="form-control" name="qualification" placeholder="Enter qualification" id="qualification">
+                        </div>
+                        <div class="form-group">
+                            <label>Primary Aircraft Qualification </label>
+                                <select class="form-control" name="acq1">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for storetype in storetypes %}
+                                        <option value="{{ storetype.storetype_id }}">{{ storetype.storetype_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Secondary Aircraft Qualification </label>
+                                <select class="form-control" name="acq2">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for storetype in storetypes %}
+                                        <option value="{{ storetype.storetype_id }}">{{ storetype.storetype_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tertiary Aircraft Qualification </label>
+                                <select class="form-control" name="acq3">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for storetype in storetypes %}
+                                        <option value="{{ storetype.storetype_id }}">{{ storetype.storetype_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Course 1 details </label>
+                                <select class="form-control" name="course1">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for course in courses %}
+                                        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Course 1 status </label>
+                                <select class="form-control" name="course1_status" placeholder="Select Course1 status" id="course1_status">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="COMPLETED">Completed</option>
+                                    <option value="UDERGOING">Undergoing</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Course 2 details </label>
+                                <select class="form-control" name="course2">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for course in courses %}
+                                        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Course 2 status </label>
+                                <select class="form-control" name="course2_status" placeholder="Select Course2 status" id="course2_status">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="COMPLETED">Completed</option>
+                                    <option value="UDERGOING">Undergoing</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Course 3 details </label>
+                                <select class="form-control" name="course3">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for course in courses %}
+                                        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Course 3 status </label>
+                                <select class="form-control" name="course3_status" placeholder="Select Course3 status" id="course3_status">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="COMPLETED">Completed</option>
+                                    <option value="UDERGOING">Undergoing</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Course 4 details </label>
+                                <select class="form-control" name="course4">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for course in courses %}
+                                        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Course 4 status </label>
+                                <select class="form-control" name="course4_status" placeholder="Select Course4 status" id="course4_status">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="COMPLETED">Completed</option>
+                                    <option value="UDERGOING">Undergoing</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Course 5 details </label>
+                                <select class="form-control" name="course5">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for course in courses %}
+                                        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Course 5 status </label>
+                                <select class="form-control" name="course5_status" placeholder="Select Course5 status" id="course5_status">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="COMPLETED">Completed</option>
+                                    <option value="UDERGOING">Undergoing</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Joining </label>
+                            <input type="date" class="form-control" name="doj" placeholder="Enter date of joining" id="doj">
+                        </div>
+                        <div class="form-group">
+                            <label>Present Station </label>
+                                <select class="form-control" name="station">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for customer in customers %}
+                                        <option value="{{ customer.customer_id }}">{{ customer.customer_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Joining Station </label>
+                            <input type="date" class="form-control" name="doj_station" placeholder="Enter date of joining station" id="doj_station">
+                        </div>
+                        <div class="form-group">
+                            <label>Seniority in present rank </label>
+                            <input type="date" class="form-control" name="seniority" placeholder="Enter Seniority in present rank" id="seniority">
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <label> Present Unit </label>
+                                <select class="form-control" name="unit">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for customer in customers %}
+                                        <option value="{{ customer.customer_id }}">{{ customer.sub_customer_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Select preent medical category </label>
+                                <select class="form-control" name="medical_category" placeholder="Select Medical category" id="medical_category">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="S1A1">S1A1</option>
+                                    <option value="S2A2">S2A2</option>
+                                    <option value="S2A1">S2A1</option>
+                                    <option value="S3A2">S3A2</option>
+                                    <option value="S3A3">S3A3</option>
+                                    <option value="S3A1">S3A1</option>
+                                    <option value="S4A4">S4A4</option>
+                                    <option value="S5A5">S5A5</option>
+                                    <option value="S2A2_TEMP">S2A2_TEMP</option>
+                                    <option value="S3A2_TEMP">S3A2_TEMP</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of birth </label>
+                            <input type="date" class="form-control" name="dob" placeholder="Enter Date of birth" id="dob">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Commission </label>
+                            <input type="date" class="form-control" name="doc" placeholder="Enter Date of Commission" id="doc">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Retirement </label>
+                            <input type="date" class="form-control" name="dor" placeholder="Enter Date of retiremnet" id="dor">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Leaving service </label>
+                            <input type="date" class="form-control" name="dol" placeholder="Enter Date of leaving service" id="dol">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Superannuation </label>
+                            <input type="date" class="form-control" name="dos" placeholder="Enter Date of Superannuation" id="dos">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Spouse Name </label>
+                            <input type="text" class="form-control" name="spouse_name" placeholder="Enter Spouse Name" id="spouse_name">
+                        </div>
+                        <div class="form-group">
+                            <label>Select unit afloat/ashore </label>
+                                <select class="form-control" name="afloat_ashore">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="AFLOAT">Afloat</option>
+                                    <option value="ASHORE">Ashore</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Gender </label>
+                                <select class="form-control" name="gender" placeholder="Select gender" id="gender">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Marital Status </label>
+                                <select class="form-control" name="marital_status" placeholder="Select marital status" id="marital_status">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="M">Married</option>
+                                    <option value="UM">Unmarried</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Command/SCE result </label>
+                                <select class="form-control" name="cmd_sce_result" placeholder="Select Command/SCE Result" id="cmd_sce_result">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="P">Passed</option>
+                                    <option value="N">Not passed</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Chance and Year of passing </label>
+                            <input type="number" class="form-control" name="chance_sce" placeholder="Enter Chance availed" id="chance_sce">
+                            <input type="number" class="form-control" name="year_passing" placeholder="Enter Year passing" id="year_passing">
+                        </div>
+                        <div class="form-group">
+                            <label> Special Child </label>
+                                <select class="form-control" name="special_child" placeholder="Whether the Officer has Special Child" id="special_child">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Sub Lt Seniority </label>
+                            <input type="number" class="form-control" name="sublt_seniority" placeholder="Enter Sub Lt Seniority" id="sublt_seniority">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Spouse Nationality </label>
+                            <input type="text" class="form-control" name="spouse_nationality" placeholder="Enter spouse nationality" id="spouse_nationality">
+                        </div>
+                        <div class="form-group">
+                            <label>Select State </label>
+                                <select class="form-control" name="state">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for state in states %}
+                                        <option value="{{ state.state_id }}">{{ state.state_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> PR Applied or not </label>
+                                <select class="form-control" name="pr_applied_yn" placeholder="Whether the Officer has applied for PR" id="pr_applied_yn">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Resettled or not </label>
+                                <select class="form-control" name="resettled_yn" placeholder="Whether the Officer is resettled" id="resettled_yn">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Remarks </label>
+                            <input type="text" class="form-control" name="remarks" placeholder="Enter remarks, if any" id="spouse_nationality">
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Add Officer</button>
+                    </div>
+                </form>
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+
+        
+
+    </div><!-- /.container-fluid -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Course Details</h3>
+
+                    <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- /.card-body -->
+                </div>
+            <!-- /.card -->
+
+        </div>
+    </div>
+  </section>
+
+  <script type = "text/javascript">
+  $("#rank").prop("selectedIndex", -1);
+</script>
+<script type = "text/javascript">
+    $document.on('submit','#add_course_form',function(e){
+        e.preventDefault();
+
+        $.ajax({ 
+            type:'POST',
+            url:'add_course_save/',
+            data: {
+                coursename:$('#course_name').val(),
+                coursenumber:$('#course_number').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
+            },
+            success:function(){
+                alert("Course added successfully")
+            }
+        });
+    });
+
+  </script>
+
+  {% endblock main_content %}
+
+  {% block custom_js %}
+    {% comment %} Checking if email and username already exists or not usin Ajax {% endcomment %}
+
+    
+  {% endblock custom_js %}

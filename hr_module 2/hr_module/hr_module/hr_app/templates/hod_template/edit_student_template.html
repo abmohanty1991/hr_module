@@ -1,0 +1,136 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Edit Student | #ID : {{ students.hrmuserid }}
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Course</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'edit_student_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+
+                        <div class="card-body">
+                            <!-- <div class="form-group">
+                                <label>Pno </label>
+                                <input type="text" class="form-control" name="newpno" placeholder="Pno" value = "{{ student.pno}}">
+                                <input type="hidden" name="hrmuserid" value="{{ student.hrmuserid }}" />
+                            </div> -->
+                            <div class="form-group">
+                                <label>Pno</label>
+                                <input type="text" class="form-control" value="{{students.pno}}" readonly="readonly"/>
+                              </div>
+                            <div class="form-group">
+                                <label>Name </label>
+                                <input type="text" class="form-control" value = "{{ students.name }}" name="newname" placeholder="Enter Name">
+                                <input type="hidden" name="hrmuserid" value="{{ student.hrmuserid }}" />
+                            </div>
+                            <!-- <div class="form-group">
+                                <label>Rank </label>
+                                <option value="1">Lt</option>
+                                <input type="text" class="form-control"  value = "{{ students.rank }}" name="newrank" placeholder="Enter Rank">
+                                <input type="hidden" name="hrmuserid" value="{{ student.hrmuserid }}" />
+                            </div> -->
+                            <div class="form-group">
+                                <label>Rank </label>
+                                    <select class="form-control" name="newrank">
+                                        <option value="SLt">SLt</option>
+                                        <option value="Lt">Lt</option>
+                                        <option value="Lt Cdr">Lt Cdr</option>
+                                        <option value="Cdr">Cdr</option>
+                                        <option value="Capt">Capt</option>
+                                        <option value="Cmde">Cmde</option>
+                                        <option value="RAdm">RAdm</option>
+                                        <option value="VAdm">VAdm</option>
+                                        
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date of joining </label>
+                                <input type="date" class="form-control" name="newdoj" placeholder="Enter Date of Joining" >
+                                <input type="hidden" name="hrmuserid" value="{{ student.hrmuserid }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Industry Experience </label>
+                                <input type="text" class="form-control" name="newindustryexp" placeholder="Enter Industry Experience" >
+                                <input type="hidden" name="hrmuserid" value="{{ student.hrmuserid }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Industry Experience in years </label>
+                                <input type="number" class="form-control" name="newindustryexpyrs" placeholder="Enter years of Industry experience" >
+                                <input type="hidden" name="hrmuserid" value="{{ student.hrmuserid }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Primary aircraft </label>
+                                    <select class="form-control" name="newprimaryaircraft">
+                                        {% for storetype in storetypes %}
+                                            <option value="{{ storetype.storetype_id }}">{{ storetype.aircraft_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Secondary aircraft </label>
+                                    <select class="form-control" name="newsecondaryaircraft">
+                                        {% for storetype in storetypes %}
+                                            <option value="{{ storetype.storetype_id }}">{{ storetype.aircraft_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Update Student</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}

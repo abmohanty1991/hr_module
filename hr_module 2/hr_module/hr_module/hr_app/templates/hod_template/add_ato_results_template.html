@@ -1,0 +1,195 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Add ATO Results
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">ATO Result Details</h3>
+
+                    <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                        <th>Serial</th>
+                        <th>Pno</th>
+                        <th>Name</th>
+                        <th>Rank</th>
+                        <th>Phase 1 Percentage</th>
+                        <th>Phase 2 Percentage</th>
+                        <th>OJT Percentage</th>
+                        <th>Subcourses cumulative percentage</th>
+                        <!-- <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for atoresult in atoresults %}
+                        <tr>
+                        <!-- <td>{{ course.id }}</td> -->
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ atoresult.hrmuserid.pno }}</td>
+                        <td>{{ atoresult.hrmuserid.name }}</td>
+                        <td>{{ atoresult.hrmuserid.rank }}</td>
+                        <td>{{ atoresult.p1_percentage }}</td>
+                        <td>{{ atoresult.p2_percentage }}</td>
+                        <td>{{ atoresult.ojt_percentage }}</td>
+                        <td>{{ atoresult.subcourses_percentage }}</td>
+                        <td>
+                            <a href="{% url 'edit_ato_results' atoresult.ato_result_id %}" class="btn btn-success">Edit</a> 
+                            <a href="{% url 'delete_ato_results' atoresult.ato_result_id %}" class="btn btn-danger">Delete</a>
+                        </td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                </div>
+            <!-- /.card -->
+
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Add ATO Results</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id = "add_result_form" srole="form" method="POST" action="{% url '_save' %}">
+                    {% csrf_token %}
+
+                    
+                            {% comment %} Display Messages {% endcomment %}
+                            {% if messages %}
+                            <div class="form-group">
+                            <div class="col-12">
+                                {% for message in messages %}
+                                {% if message.tags == "error" %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                {% elif message.tags == "success" %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            </div>
+                            {% endif %}
+                        
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Pno </label>
+                                <select class="form-control" name="pno">
+                                    {% for student in students %}
+                                        <option value="{{ atoresults.hrmuserid }}">{{ atoresults.hrmuserid.pno }}</option>
+                                        <input type="hidden" name="hrmuserid" value="{{ atoresults.hrmuserid }}" />
+                                    {% endfor %}
+                                    
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Name </label>
+                            <input type="text" class="form-control" name="name" placeholder="Select Name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label> Rank </label>
+                            <input type="text" class="form-control" name="rank" placeholder="Select Rank" id="rank">
+                        </div>
+                        <div class="form-group">
+                            <label> Enter Phase 1 percentage </label>
+                            <input type="number" step="any" class="form-control" name="p1percent" placeholder="Enter Phase 1 percentage" id="p1percent">
+                        </div>
+                        <div class="form-group">
+                            <label> Enter Phase 2 percentage </label>
+                            <input type="number" step="any" class="form-control" name="p2percent" placeholder="Enter Phase 2 percentage" id="p2percent">
+                        </div>
+                        <div class="form-group">
+                            <label> Enter Subcourses percentage </label>
+                            <input type="number" step="any" class="form-control" name="subpercent" placeholder="Enter Subcourses percentage" id="subpercent">
+                        </div>
+                        <div class="form-group">
+                            <label> Enter OJT percentage </label>
+                            <input type="number" step="any" class="form-control" name="ojtpercent" placeholder="Enter OJT percentage" id="ojtpercent">
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Add Result</button>
+                    </div>
+                </form>
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+
+        
+
+    </div><!-- /.container-fluid -->
+  </section>
+
+<script type = "text/javascript">
+    $document.on('submit','#add_course_form',function(e){
+        e.preventDefault();
+
+        $.ajax({ 
+            type:'POST',
+            url:'add_course_save/',
+            data: {
+                coursename:$('#course_name').val(),
+                coursenumber:$('#course_number').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
+            },
+            success:function(){
+                alert("Course added successfully")
+            }
+        });
+    });
+
+  </script>
+
+  {% endblock main_content %}
+
+  {% block custom_js %}
+    {% comment %} Checking if email and username already exists or not usin Ajax {% endcomment %}
+
+    
+  {% endblock custom_js %}

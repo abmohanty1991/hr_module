@@ -1,0 +1,153 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Change Commission | #ID : {{ personnelmaster.id }}
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Change Commission</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'edit_commission_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+
+                        <div class="card-body">
+                            
+                            <div class="form-group">
+                                <label>Name </label>
+                                <input type="text" class="form-control" name="name" value="{{ personnelmaster.name }}" placeholder="Name of the Officer" readonly>
+                                <input type="hidden" name="personnel_id" value="{{ personnelmaster.personnel_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Rank </label>
+                                <input type="text" class="form-control" name="rank" value="{{ personnelmaster.rank }}" placeholder="Rank of the Officer" readonly>
+                                <input type="hidden" name="personnel_id" value="{{ personnelmaster.personnel_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>P.No </label>
+                                <input type="text" class="form-control" name="pno" value="{{ personnelmaster.pno }}" placeholder="P.No" readonly>
+                                <input type="hidden" name="personnel_id" value="{{ personnelmaster.personnel_id }}" />
+                            </div>
+                            <div class="details-form-field">
+                                <label for="new_commission">Commission:</label>
+                                <select id="new_commission" name="new_commission">
+                                    <option value="">(Select)</option>
+                                    <option value="PC">PC</option>
+                                 </select>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Update Commission</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Officer Details</h3>
+    
+                        <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+    
+                            <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                            <th>Serial</th>
+                            <th>Pno</th>
+                            <th>Name</th>
+                            <th>Rank</th>
+                            <th>Branch</th>
+                            <th>Cadre</th>
+                            <th>Present Commission</th>
+                            <th>Present Unit</th>
+                            <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in students %}
+                            <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ personnelmaster.pno }}</td>
+                            <td>{{ personnelmaster.name }}</td>
+                            <td>{{ personnelmaster.rank }}</td>
+                            <td>{{ personnelmaster.branch }}</td>
+                            <td>{{ personnelmaster.cadre }}</td>
+                            <td>{{ personnelmaster.commission_type }}</td>
+                            <td>{{ personnelmaster.unit }}</td>
+                            <td>
+                                <a href="{% url 'change_commission' personnelmasters.personnel_id %}" class="btn btn-success">Change Commission</a> 
+                                <!-- <a href="{% url 'delete_student' student.hrmuserid %}" class="btn btn-danger">Delete</a> -->
+                            </td>
+                            </tr>  
+                            {% endfor %}
+                            
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    </div>
+                <!-- /.card -->
+    
+            </div>
+        </div>
+      </section>
+
+  {% endblock main_content %}

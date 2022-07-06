@@ -1,0 +1,137 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Master View of Officers
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Course</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id = "add_course_form" role="form" method="POST" action="{% url 'add_course_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                        <!-- /.card-body -->
+
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{myFilter.form}}
+                            <button class="btn btn-primary" type="submit">
+                                Submit
+                            </button>
+                        </form>
+                        {% for obj in myFilter.qs %}
+                            {{ obj.name }} - ${{ obj.pno }}<br />
+                        {% endfor %}
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                <th>Serial</th>
+                                <th>Pno</th>
+                                <th>Name</th>
+                                <th>Rank</th>
+                                <th>Commission</th>
+                                <!-- <th>Action</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for obj in myFilter.qs %}
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ obj.pno }}</td>
+                                <td>{{ obj.name }}</td>
+                                <td>{{ obj.rank }}</td>
+                                <td>{{ obj.commission_type }}</td>
+                                <td>
+                                    <a href="{% url 'edit_course' course.course_id %}" class="btn btn-success">Edit</a> 
+                                    <!-- <a href="{% url 'delete_course' course.course_id %}" class="btn btn-danger">Delete</a> -->
+                                </td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                            </table>
+                        </div>
+
+                        
+                        <!-- /.card-body -->
+                        </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+    <script type = "text/javascript">
+        $document.on('submit','#add_course_form',function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type:'POST',
+                url:'add_course_save/',
+                data: {
+                    coursename:$('#course_name').val(),
+                    coursenumber:$('#course_number').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
+                },
+                success:function(){
+                    alert("Course added successfully")
+                }
+            });
+        });
+
+      </script>
+  {% endblock main_content %}
+}

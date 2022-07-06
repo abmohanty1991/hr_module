@@ -1,0 +1,279 @@
+{% load static %}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="" class="brand-link">
+        <img src="{% static 'dist/img/navy.jpg' %}" alt="" class="brand-image img-circle elevation-3 ml-5"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light">HR Module</span>
+      </a>
+
+      <!-- Sidebar -->
+
+
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="{% static 'dist/img/logo.png' %}" class="img-circle elevation-2 ml-5" alt="User Image" style="max-width:100%;">
+          </div>
+          <div class="info">
+            <a href="" class="d-block">{{ user.first_name }} {{ user.last_name }}</a>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+
+            <li class="nav-item">
+              {% url 'admin_home' as admin_home %}
+              <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Home
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'add_officers' as add_officers %}
+              <a href="{{ add_officers }}" class="nav-link {% if request.path == add_officers %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Add Officers
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manage_commission' as manage_commission %}
+              <a href="{{ manage_commission }}" class="nav-link {% if request.path == manage_commission  %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Change commission of Officer
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'upd_cdr_to_capt' as upd_cdr_to_capt %}
+              <a href="{{ upd_cdr_to_capt }}" class="nav-link {% if request.path == upd_cdr_to_capt %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Mark officer promoted to Captain
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'mark_transfer' as mark_transfer %}
+              <a href="{{ mark_transfer }}" class="nav-link {% if request.path == mark_transfer %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Mark officer for transfer
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'mark_transfer_order_out' as mark_transfer_order_out %}
+              <a href="{{ mark_transfer_order_out }}" class="nav-link {% if request.path == mark_transfer_order_out %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Mark transfer order out
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'mark_officer_reported' as mark_officer_reported %}
+              <a href="{{ mark_officer_reported }}" class="nav-link {% if request.path == mark_officer_reported %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Mark Officer reported
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manage_transfer' as manage_transfer %}
+              <a href="{{manage_transfer}}" class="nav-link {% if request.path == manage_transfer %} active {% endif %} ">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Manage Transfers
+                </p>
+              </a>
+            </li> 
+            
+            <li class="nav-item">
+              {% url 'define_unit_acq_billets' as define_unit_acq_billets %}
+              <a href="{{ define_unit_acq_billets }}" class="nav-link {% if request.path == define_unit_acq_billets %} active {% endif %} ">
+                <i class="nav-icon fas fa-user-graduate"></i>
+                <p>
+                  Define Aircraft wise unit billets
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manage_unit_acq_billets' as manage_unit_acq_billets %}
+              <a href="{{ manage_unit_acq_billets }}" class="nav-link {% if request.path == manage_unit_acq_billets %} active {% endif %} ">
+                <i class="nav-icon fas fa-user-graduate"></i>
+                <p>
+                  Manage Aircraft wise unit billets
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'mark_officers_for_courses' as mark_officers_for_courses %}
+              <a href="{{ mark_officers_for_courses }}" class="nav-link {% if request.path == mark_officers_for_courses %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Mark Officers for courses
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'amend_marked_courses' as add_course %}
+                <a href="{{ amend_marked_courses }}" class="nav-link {% if request.path == amend_marked_courses %} active {% endif %}">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Amend courses marked to Officers
+                  </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'authorise_assigned_course' as authorise_assigned_course %}
+              <a href="{{ authorise_assigned_course }}" class="nav-link {% if request.path == authorise_assigned_course %} active {% endif %}">
+                <i class="nav-icon fas fa-chalkboard"></i>
+                <p>
+                  Manage Course
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'mark_compassionate_grounds' as mark_compassionate_grounds %}
+              <a href="{{ mark_compassionate_grounds }}" class="nav-link {% if request.path == mark_compassionate_grounds %} active {% endif %}">
+                <i class="nav-icon fas fa-chalkboard"></i>
+                <p>
+                  Mark Officer on Compassionate Grounds 
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'add_details_of_retired_officers' as add_details_of_retired_officers %}
+              <a href="{{ add_details_of_retired_officers }}" class="nav-link {% if request.path == add_details_of_retired_officers %} active {% endif %}">
+                <i class="nav-icon fas fa-chalkboard"></i>
+                <p>
+                  Add details of Retired Officers 
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'mark_officers_under_check' as mark_officers_under_check %}
+              <a href="{{ mark_officers_under_check }}" class="nav-link {% if request.path == mark_officers_under_check %} active {% endif %}">
+                <i class="nav-icon fas fa-chalkboard"></i>
+                <p>
+                  Mark Officers under check
+                </p>
+              </a>
+            </li>
+            
+
+            <!-- <li class="nav-item">
+              {% url 'add_subject' as add_subject %}
+              <a href="{{ add_subject }}" class="nav-link {% if request.path == add_subject %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Add Subject
+                </p>
+              </a>
+            </li>  -->
+
+
+            <!-- <li class="nav-item">
+              {% url 'manage_session' as manage_session %}
+              {% url 'edit_session' session_id=id as edit_session %}
+              <a href="{{ manage_session }}" class="nav-link {% if request.path == manage_session %} active {% endif %} {% if request.path == edit_session %} active {% endif %}">
+                <i class="nav-icon fas fa-graduation-cap"></i>
+                <p>
+                  Manage Session 
+                </p>
+              </a>
+            </li> -->
+
+            <!-- <li class="nav-item">
+              {% url 'add_session' as add_session %}
+              <a href="{{ add_session }}" class="nav-link {% if request.path == add_session %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Add Session
+                </p>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              {% url 'admin_view_attendance' as admin_view_attendance %}
+              <a href="{{ admin_view_attendance }}" class="nav-link {% if request.path == admin_view_attendance %} active {% endif %}">
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <p>
+                  View Attendance
+                </p>
+              </a>
+            </li> -->
+
+            <!-- <li class="nav-item">
+              {% url 'student_feedback_message' as student_feedback_message %}
+              <a href="{{ student_feedback_message }}" class="nav-link {% if request.path == student_feedback_message %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Student Feedback
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'staff_feedback_message' as staff_feedback_message %}
+              <a href="{{ staff_feedback_message }}" class="nav-link {% if request.path == staff_feedback_message %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Stafff Feedback
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'student_leave_view' as student_leave_view %}
+              <a href="{{ student_leave_view }}" class="nav-link {% if request.path == student_leave_view %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Student Leave
+                </p>
+              </a>
+            </li> -->
+<!-- 
+            <li class="nav-item">
+              {% url 'staff_leave_view' as staff_leave_view %}
+              <a href="{{ staff_leave_view }}" class="nav-link {% if request.path == staff_leave_view %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Staff Leave
+                </p>
+              </a>
+            </li> -->
+
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>

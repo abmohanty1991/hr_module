@@ -1,0 +1,255 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Add Student
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+
+<section class="content">
+    
+    
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Add Course</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id = "add_student_form" srole="form" method="POST" action="{% url 'add_student_save' %}">
+                    {% csrf_token %}
+
+                    
+                            {% comment %} Display Messages {% endcomment %}
+                            {% if messages %}
+                            <div class="form-group">
+                            <div class="col-12">
+                                {% for message in messages %}
+                                {% if message.tags == "error" %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                {% elif message.tags == "success" %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            </div>
+                            {% endif %}
+                        
+
+                    <div class="card-body">
+                        <!-- <div class="form-group">
+                            <label>Pno </label>
+                                <select class="form-control" name="pno">
+                                    {% for student in students %}
+                                        <option value="{{ student.id }}">{{ student.pno }}</option>
+                                    {% endfor %}
+                                </select>
+                        </div> -->
+                        <div class="form-group">
+                            <label>Student P.No </label>
+                            <input type="text" class="form-control" name="pno" placeholder="Select Pno" id="pno">
+                        </div>
+                        <div class="form-group">
+                            <label> Name </label>
+                            <input type="text" class="form-control" name="name" placeholder="Select Name" id="name">
+                        </div>
+                        <!-- <div class="form-group">
+                            <label> Rank </label>
+                            <input type="text" class="form-control" name="rank" placeholder="Select Rank" id="rank">
+                        </div> -->
+                        <div class="form-group">
+                            <label> Rank </label>
+                                <select class="form-control" name="rank" placeholder="Select Rank" id="rank">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option value="Lt">Lt</option>
+                                    <option value="Lt Cdr">Lt Cdr</option>
+                                    <option value="Cdr">Cdr</option>
+                                    <option value="Capt">Capt</option>
+                                    <option value="Cmde">Cmde</option>
+                                    <option value="RAdm">RAdm</option>
+                                    <option value="VAdm">VAdm</option> 
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Course </label>
+                                <select class="form-control" name="course">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    {% for course in courses %}
+                                        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div>
+                            {% for course in courses %}
+                            <input type="hidden" name="course_id" value="{{ course.course_id }}" />
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label>Course Number</label>
+                                <select class="form-control" name="coursenumber">
+                                    {% for course in courses %}
+                                        <option value="{{ course.course_id }}">{{ course.course_number }}</option>
+                                        <!-- <input type="hidden" name="course_id" value="{{ course.course_id }}" /> -->
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Joining </label>
+                            <input type="date" class="form-control" name="doj" placeholder="Enter date of joining" id="doj">
+                        </div>
+                        <div class="form-group">
+                            <label>Industry Experience </label>
+                            <input type="text" class="form-control" name="industryexp" placeholder="Enter Pevious Industry Experience" id="industryexp">
+                        </div>
+                        <div class="form-group">
+                            <label>Industry Experience in Years </label>
+                            <input type="number" class="form-control" name="industryexpyrs" placeholder="Enter Industry Experience in years" id="industryexpyrs">
+                        </div>
+                        <div class="form-group">
+                            <label>Primary aircraft </label>
+                                <select class="form-control" name="primaryaircraft">
+                                    {% for storetype in storetypes %}
+                                        <option value="{{ storetype.storetype_id }}">{{ storetype.aircraft_name }}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Secondary aircraft </label>
+                                <select class="form-control" name="secondaryaircraft">
+                                    {% for storetype in storetypes %}
+                                        <option value="{{ storetype.storetype_id }}">{{ storetype.aircraft_name }}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                    </div>
+                </form>
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+
+        
+
+    </div><!-- /.container-fluid -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Course Details</h3>
+
+                    <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                        <th>Serial</th>
+                        <th>Pno</th>
+                        <th>Name</th>
+                        <th>Rank</th>
+                        <th>Date of joining</th>
+                        <th>Industry experience</th>
+                        <th>Industry experience in years</th>
+                        <th>Assigned Course</th>
+                        <th>Primary aircraft specialisation</th>
+                        <th>Secondary aircraft specialisation</th>
+                        <!-- <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                        <!-- <td>{{ course.id }}</td> -->
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ student.pno }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.rank }}</td>
+                        <td>{{ student.date_of_joining }}</td>
+                        <td>{{ student.industry_exp }}</td>
+                        <td>{{ student.industry_exp_yrs }}</td>
+                        <td>{{ student.course_id.course_name }}</td>
+                        <td>{{ student.primary_aircraft }}</td>
+                        <td>{{ student.secondary_aircraft }}</td>
+                        <td>
+                            <a href="{% url 'edit_student' student.hrmuserid %}" class="btn btn-success">Edit</a> 
+                            <!-- <a href="{% url 'delete_student' student.hrmuserid %}" class="btn btn-danger">Delete</a> -->
+                        </td>
+                        </tr>  
+                        {% endfor %}
+                        
+                    </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                </div>
+            <!-- /.card -->
+
+        </div>
+    </div>
+  </section>
+
+  <script type = "text/javascript">
+  $("#rank").prop("selectedIndex", -1);
+</script>
+<script type = "text/javascript">
+    $document.on('submit','#add_course_form',function(e){
+        e.preventDefault();
+
+        $.ajax({ 
+            type:'POST',
+            url:'add_course_save/',
+            data: {
+                coursename:$('#course_name').val(),
+                coursenumber:$('#course_number').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
+            },
+            success:function(){
+                alert("Course added successfully")
+            }
+        });
+    });
+
+  </script>
+
+  {% endblock main_content %}
+
+  {% block custom_js %}
+    {% comment %} Checking if email and username already exists or not usin Ajax {% endcomment %}
+
+    
+  {% endblock custom_js %}

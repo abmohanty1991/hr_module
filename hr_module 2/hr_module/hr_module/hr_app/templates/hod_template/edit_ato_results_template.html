@@ -1,0 +1,110 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Edit ATO Results | #ID : {{ atoresults.ato_result_id }}
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit ATO Results</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'edit_ato_results_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Old Phase 1 Percentage </label>
+                                <input type="text" class="form-control" name="oldp1percent" value="{{ atoresults.p1_percentage }}" placeholder="Existing Phase 1 Percent" readonly>
+                                <input type="hidden" name="ato_result_id" value="{{ atoresults.ato_result_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>New Phase 1 Percentage </label>
+                                <input type="text" class="form-control" name="newp1percent" placeholder="Enter Phase 1 percentage" >
+                                <input type="hidden" name="ato_result_id" value="{{ atoresults.ato_result_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Old Phase 2 Percentage </label>
+                                <input type="text" class="form-control" name="oldp2percent" value="{{ atoresults.p2_percentage }}" placeholder="Existing Phase 2 Percent" readonly>
+                                <input type="hidden" name="ato_result_id" value="{{ atoresults.ato_result_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>New Phase 1 Percentage </label>
+                                <input type="text" class="form-control" name="newp2percent" placeholder="Enter Phase 2 percentage" >
+                                <input type="hidden" name="ato_result_id" value="{{ atoresults.ato_result_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Old subcourses Percentage </label>
+                                <input type="text" class="form-control" name="oldsubpercent" value="{{ atoresults.subcourses_percentage }}" placeholder="Existing Subcourses Percent" readonly>
+                                <input type="hidden" name="ato_result_id" value="{{ atoresults.ato_result_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>New subcourses1 Percentage </label>
+                                <input type="text" class="form-control" name="newsubpercent" placeholder="Enter Subcourses percentage" >
+                                <input type="hidden" name="ato_result_id" value="{{ atoresults.ato_result_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Old OJT Percentage </label>
+                                <input type="text" class="form-control" name="oldojtpercent" value="{{ atoresults.ojt_percentage }}" placeholder="Existing OJT Percent" readonly>
+                                <input type="hidden" name="ato_result_id" value="{{ atoresults.ato_result_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>New OJT Percentage </label>
+                                <input type="text" class="form-control" name="newojtpercent" placeholder="Enter OJT percentage" >
+                                <input type="hidden" name="ato_result_id" value="{{ atoresults.ato_result_id }}" />
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Update Ato Results</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}

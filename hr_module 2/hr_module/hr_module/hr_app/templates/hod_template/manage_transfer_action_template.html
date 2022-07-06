@@ -1,0 +1,152 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Mark Officer for Transfer | #ID : {{ personnelmasters.personnel_id }}
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id = "add_course_form" role="form" method="POST" action="{% url 'manage_transfer_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>P.No </label>
+                                <input type="text" class="form-control" name="pno" value="{{ personnelmasters.pno }}" readonly>
+                                <input type="hidden" name="personnel_id" value="{{ personnelmasters.personnel_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Name </label>
+                                <input type="text" class="form-control" name="name" value="{{ personnelmasters.name }}" readonly>
+                                <input type="hidden" name="personnel_id" value="{{ personnelmasters.personnel_id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Rank </label>
+                                <input type="text" class="form-control" name="rank" value="{{ personnelmasters.rank }}" readonly>
+                                <input type="hidden" name="personnel_id" value="{{ personnelmasters.personnel_id }}" />
+                            </div>
+                            <div class="form-group"> 
+                                <label>Present Unit </label>
+                                <input type="text" class="form-control" name="present_unit" value="{{ personnelmasters.rank }}" readonly>
+                                <input type="hidden" name="personnel_id" value="{{ personnelmasters.personnel_id }}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Proposed Unit </label>
+                                    <select class="form-control" name="proposed_unit">
+                                        <option disabled selected value> -- select unit -- </option>
+                                        {% for customer in customers %}
+                                            <option value="{{ customer.customer_id }}">{{ customer.sub_customer_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Enter DTBR </label>
+                                <input type="date" class="form-control" name="dtbr" placeholder="Enter DTBR" id="dtbr">
+                            </div>
+                            <div class="form-group">
+                                <label>Proposed appointment </label>
+                                <input type="text" class="form-control" name="propsoed_appointment" placeholder="Enter DTproposed appointment" id="propsoed_appointment">
+                            </div>
+                            
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Add Course</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Course Details</h3>
+
+                            <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- /.card-body -->
+                        </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+    <script type = "text/javascript">
+        $document.on('submit','#add_course_form',function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type:'POST',
+                url:'add_course_save/',
+                data: {
+                    coursename:$('#course_name').val(),
+                    coursenumber:$('#course_number').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
+                },
+                success:function(){
+                    alert("Course added successfully")
+                }
+            });
+        });
+
+      </script>
+  {% endblock main_content %}
+}
